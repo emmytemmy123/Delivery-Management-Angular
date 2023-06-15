@@ -1,0 +1,10 @@
+
+
+<p-dropdown [options]="groupedCities" [(ngModel)]="selectedCity3" placeholder="Select a City" [group]="true">
+	<ng-template let-group pTemplate="group">
+		<div class="p-d-flex p-ai-center">
+			<span>{{group.label}}</span>
+		</div>
+	</ng-template>
+</p-dropdown>
+

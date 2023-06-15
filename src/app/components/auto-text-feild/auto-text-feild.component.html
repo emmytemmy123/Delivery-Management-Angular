@@ -1,0 +1,8 @@
+<p-autoComplete [(ngModel)]="selectedCountryAdvanced" [suggestions]="filteredCountries"
+(completeMethod)="filterCountry($event)" field="name" [dropdown]="true">
+<ng-template let-country pTemplate="item">
+  <div class="country-item">
+    <div>{{country.name}}</div>
+  </div>
+</ng-template>
+</p-autoComplete>

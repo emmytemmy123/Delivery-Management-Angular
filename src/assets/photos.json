@@ -1,0 +1,58 @@
+{
+    "data":[
+        {
+            "previewImageSrc": "assets/image/landing/galleria1.jpg",
+            "thumbnailImageSrc": "gallery/assets/image/galleria1.jpg",
+            "alt": "Description for Image 1",
+            "title": "Title 1"
+        },
+        {
+            "previewImageSrc": "assets/image/landing/galleria2.jpg",
+            "thumbnailImageSrc": "gallery/assets/image/galleria2.jpg",
+            "alt": "Description for Image 2",
+            "title": "Title 2"
+        },
+        {
+            "previewImageSrc": "assets/image/landing/galleria3.jpg",
+            "thumbnailImageSrc": "gallery/assets/image/galleria3.jpg",
+            "alt": "Description for Image 3",
+            "title": "Title 3"
+        },
+        {
+            "previewImageSrc": "assets/image/landing/galleria4.jpg",
+            "thumbnailImageSrc": "gallery/assets/image/galleria4.jpg",
+            "alt": "Description for Image 4",
+            "title": "Title 4"
+        },
+        {
+            "previewImageSrc": "assets/image/landing/galleria5.jpg",
+            "thumbnailImageSrc": "gallery/assets/image/galleria5.jpg",
+            "alt": "Description for Image 5",
+            "title": "Title 5"
+        },
+        {
+            "previewImageSrc": "assets/image/landing/galleria6.jpg",
+            "thumbnailImageSrc": "gallery/assets/image/galleria6.jpg",
+            "alt": "Description for Image 6",
+            "title": "Title 6"
+        },
+        {
+            "previewImageSrc": "assets/image/landing/galleria7.jpg",
+            "thumbnailImageSrc": "gallery/assets/image/galleria7s.jpg",
+            "alt": "Description for Image 7",
+            "title": "Title 7"
+        },
+        {
+            "previewImageSrc": "assets/image/landing/galleria8.jpg",
+            "thumbnailImageSrc": "assets/image/galleria8s.jpg",
+            "alt": "Description for Image 8",
+            "title": "Title 8"
+        },
+        {
+            "previewImageSrc": "assets/image/landing/galleria9.jpg",
+            "thumbnailImageSrc": "gallery/assets/image/galleria9s.jpg",
+            "alt": "Description for Image 9",
+            "title": "Title 9"
+        }
+    ]
+}

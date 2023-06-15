@@ -1,0 +1,181 @@
+
+
+<div class="py-4 px-4 mx-0 md:mx-6 lg:mx-4 lg:px-4 flex align-items-center justify-content-between relative lg:static mb-3  " >
+            
+    <a class="flex align-items-center" href="#">
+        <img src="assets/image/landing/logo.jpg" alt="Sakai Logo" height="50" class="mr-0 lg:mr-2">
+        <span class="text-900 font-medium text-1xl line-height-3 mr-8">Emmadex Delivery</span>
+    </a>
+
+    <a pRipple class="cursor-pointer block lg:hidden text-700" pStyleClass="@next" enterClass="hidden" leaveToClass="hidden" [hideOnOutsideClick]="true">
+        <i class="pi pi-bars text-4xl"></i>
+    </a>
+    
+    <div class="align-items-center surface-0 flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full left-0 px-6 lg:px-0 z-2" style="top:85%">
+        <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
+            <li>
+                <a (click)="router.navigate(['/driver'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Driver</span>
+                </a>
+            </li>
+            <li>
+                <a (click)="router.navigate(['/driver'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Sender </span>
+                </a>
+            </li>
+            <li>
+                <a (click)="router.navigate(['/features'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>How it Works</span>
+                </a>
+            </li>
+           
+            <li>
+                <a (click)="router.navigate(['/delivery'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Open Deliveries</span>
+                </a>
+            </li>
+
+            <li>
+                <a (click)="router.navigate(['/contacts'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Contact</span>
+                </a>
+            </li>
+          
+        </ul>
+        <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
+            <button pButton [routerLink]="'/registration'" pRipple label="SignUp" class="p-button-rounded border-none ml-5 font-light line-height-2 bg-blue-500 text-white"></button>
+            <button pButton [routerLink]="'/security'" pRipple label="Login" class="p-button-rounded border-none ml-5 font-light line-height-2 bg-blue-500 text-white"></button>
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="responseMessage">
+    <p style="align-items: center;">{{ responseMessage }}</p>
+  </div>
+
+  <br>
+  
+<div class="container" >
+    <div class="row" >
+        <div class="col-md-6">
+
+            <form >
+                <fieldset class="fadeinup animation-duration-3000 animation-ease-out " >
+
+                    <legend class="text-center">Valid information is required to register. <span class="req"></span></legend>
+
+                     <div class="form-group" >
+                        <span class=" p-float-label">
+                        <p-dropdown class="flex w-20rem" inputId="dropdown"  [autoDisplayFirst]="false" [options]="accountType" [showClear]="true"
+                         optionLabel="name" optionValue="name" [(ngModel)]="users.accountType" name="account"  > </p-dropdown>
+                          <label for="accountType" >Account Type</label>
+                        </span>
+                      </div>   
+
+
+                        <div class="form-group">
+                                    <span class="p-float-label" >
+                                    <input required type="text"   id="name" [(ngModel)]="users.name" name="name" class="form-control"
+                                     maxlength="28" placeholder="Enter your fullname..." />
+                                        <label for="Name"> Name:  </label>
+                                    </span>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <span class="p-float-label" >
+                                    <input required type="text"  name="email" id="email" [(ngModel)]="users.email"
+                                    class="form-control" placeholder="Enter your email" />
+                                        <label for="Email"> Email:  </label>
+                                    </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="p-float-label" >
+                                    <input required type="text"  name="phone" id="phone" [(ngModel)]="users.phone"
+                                    class="form-control" placeholder="Enter your contact" />
+                                        <label for="Phone"> Phone:  </label>
+                                    </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="p-float-label" >
+                                    <input required type="text"  name="address" id="address" [(ngModel)]="users.address" 
+                                    class="form-control" placeholder="Enter your address" />
+                                        <label for="Address"> Address:  </label>
+                                    </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="p-float-label" >
+                                    <input required type="text"  name="gender" id="gender" [(ngModel)]="users.gender"
+                                    class="form-control" placeholder="Select your sex" />
+                                        <label for="Gender"> Gender:  </label>
+                                    </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="p-float-label" >
+                                    <input required type="text"  name="country" id="country" [(ngModel)]="users.country"
+                                    class="form-control" placeholder="Nationality" />
+                                        <label for="Country"> Country:  </label>
+                                    </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="p-float-label" >
+                                    <input required type="text"  name="city" id="city" class="form-control"
+                                    [(ngModel)]="users.city" placeholder="Enter your city" />
+                                        <label for="City"> City:  </label>
+                                    </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="p-float-label" >
+                                    <input required type="text"  name="nin" id="nin" [(ngModel)]="users.nin"
+                                    class="form-control" placeholder="Enter your nin" />
+                                        <label for="Nin"> Nin:  </label>
+                                    </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="p-float-label" >
+                                    <input required type="text"  name="username" id="username" class="form-control"
+                                    [(ngModel)]="users.username" placeholder="Enter your username" />
+                                        <label for="Username"> Username:  </label>
+                                    </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="p-float-label" >
+                                    <input required type="password"  name="password" id="password" class="form-control"
+                                    [(ngModel)]="users.password" placeholder="Enter your password" />
+                                        <label for="Password"> Password:  </label>
+                                    </span>
+                                </div>
+                        
+                                 
+                                  <div class="form-group">
+                                    <input class="btn btn-success" type="submit"  value="Register" (click)="saveUsers()">
+                                </div>
+
+                                
+                                    </fieldset>
+            </form><!-- ends register form -->
+            <!-- second for to fiter user-->
+        </div><!-- ends col-6 -->
+
+
+        <div class="col-md-6" >
+
+            <app-auto-gallery></app-auto-gallery>
+
+
+        </div>
+
+
+    </div>
+</div>
+

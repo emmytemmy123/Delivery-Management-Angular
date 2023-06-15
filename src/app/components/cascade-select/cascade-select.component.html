@@ -1,0 +1,16 @@
+
+<p-cascadeSelect [(ngModel)]="selectedCity1" [options]="countries" optionLabel="cname" optionGroupLabel="name"
+	[optionGroupChildren]="['states', 'cities']" [style]="{'minWidth': '14rem'}" placeholder="Select a City">
+</p-cascadeSelect>
+
+<br> <br>
+<p-cascadeSelect [(ngModel)]="selectedCity2" [options]="countries" optionLabel="cname" optionGroupLabel="name"
+	[optionGroupChildren]="['states', 'cities']" [style]="{'minWidth': '14rem'}" placeholder="Select a City">
+	<ng-template pTemplate="option" let-option>
+		<div class="country-item">
+			<i class="pi pi-compass p-mr-2" *ngIf="option.cities"></i>
+			<i class="pi pi-map-marker p-mr-2" *ngIf="option.cname"></i>
+			<span>{{option.cname || option.name}}</span>
+		</div>
+	</ng-template>
+</p-cascadeSelect>
