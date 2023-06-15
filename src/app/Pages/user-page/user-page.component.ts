@@ -44,13 +44,13 @@ export class UserPageComponent implements OnInit {
     const parsedValue = JSON.parse(localStorageValue);
 
     this.name = parsedValue.name;
-    this.username = parsedValue.users.username;
-    this.email = parsedValue.users.email;
-    this.address = parsedValue.users.address;
-    this.phone = parsedValue.users.phone;
-    this.gender = parsedValue.users.gender;
-    this.city = parsedValue.users.city;
-    this.usersCategory = parsedValue.users.usersCategory;
+    this.username = parsedValue.username;
+    this.email = parsedValue.email;
+    this.address = parsedValue.address;
+    this.phone = parsedValue.phone;
+    this.gender = parsedValue.gender;
+    this.city = parsedValue.city;
+    this.usersCategory = parsedValue.usersCategory;
 
   }
 
