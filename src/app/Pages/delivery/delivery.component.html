@@ -38,11 +38,117 @@
                     <span>Contact</span>
                 </a>
             </li>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <p style="color: rgb(114, 114, 175);"><strong >Welcome:</strong> {{ username }}</p>
+
           
         </ul>
         <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
-            <button pButton [routerLink]="'/registration'" pRipple label="SignUp" class="p-button-rounded border-none ml-5 font-light line-height-2 bg-blue-500 text-white"></button>
-            <button pButton [routerLink]="'/security'" pRipple label="Login" class="p-button-rounded border-none ml-5 font-light line-height-2 bg-blue-500 text-white"></button>
+            <!-- <button pButton [routerLink]="'/registration'" pRipple label="SignUp" class="p-button-rounded border-none ml-5 font-light line-height-2 bg-blue-500 text-white"></button> -->
+            <button (click)="logout()" pButton  pRipple label="logOut" class="p-button-rounded border-none ml-5 font-light line-height-2 bg-blue-500 text-white"></button>
         </div>
     </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+
+      <div *ngIf="feedbackMessage" style="text-align: center;">
+        <p style="color: rgb(98, 187, 162); font-size: 24px;">{{ feedbackMessage }}</p>
+    </div>
+
+    <form [formGroup]="productForm" (ngSubmit)="saveProducts()">
+
+      <fieldset class="fadeindown animation-duration-3000 animation-ease-out" style="align-items: center;" >
+
+        <legend class="text-center">Make Your Delivery Request. <span class="req"></span></legend>
+        <!-- Sender Information -->
+
+        <div class="form-group">
+          <span class="p-float-label" >
+          <input required type="text"   id="dispatchTo" formControlName="dispatchTo"  class="form-control" />
+              <label for="Name"> Receiver Name:  </label>
+          </span>
+        </div>
+
+        <div class="form-group">
+          <span class="p-float-label" >
+          <input required type="text"   id="dispatchToAddress" formControlName="dispatchToAddress"  class="form-control"  />
+              <label for="Name"> Receiver Address:  </label>
+          </span>
+        </div>
+
+        <div class="form-group">
+          <span class="p-float-label" >
+          <input required type="text"   id="paymentMode" formControlName="paymentMode"  class="form-control"   />
+              <label for="Name"> paymentMode:  </label>
+          </span>
+        </div>
+
+        
+        <!-- Product List -->
+        <h3 style="font: 1em sans-serif;">Product List</h3>
+        <div formArrayName="productList">
+          <div *ngFor="let productGroup of productForm.get('productList').controls; let i = index" [formGroupName]="i">
+            
+            <div class="form-group">
+              <span class="p-float-label" >
+              <input required type="text"   id="name" formControlName="name"  class="form-control"   />
+                  <label for="Name"> Product Name:  </label>
+              </span>
+            </div>
+
+            <div class="form-group">
+              <span class="p-float-label" >
+              <input required type="text"   id="model" formControlName="model"  class="form-control"   />
+                  <label for="Name"> Product Model:  </label>
+              </span>
+            </div>
+
+            <div class="form-group">
+              <span class="p-float-label" >
+              <input required type="text"   id="colour" formControlName="colour"  class="form-control"  />
+                  <label for="Name"> Colour:  </label>
+              </span>
+            </div>
+
+            <div class="form-group">
+              <span class="p-float-label" >
+              <input required type="text"   id="quantity" formControlName="quantity"  class="form-control"  />
+                  <label for="Name"> Quantity:  </label>
+              </span>
+            </div>
+            
+            <div class="form-group">
+              <span class="p-float-label" >
+              <input required type="text"   id="weight" formControlName="weight"  class="form-control"   />
+                  <label for="Name"> Weight:  </label>
+              </span>
+            </div>
+           
+            <div class="form-group">
+              <span class="p-float-label" >
+              <textarea required type="text"   id="productDescription" formControlName="productDescription"  class="form-control"  ></textarea>
+                  <label for="Name"> Product Description:  </label>
+              </span>
+            </div>
+          
+
+            <!-- Add more fields for each product as needed -->
+          </div>
+        </div>
+        
+        <p-button label="Add Product" (click)="addProduct()" styleClass="p-button-rounded"></p-button>  &nbsp; 
+        <p-button label="Save" (click)="saveProducts()"  styleClass="p-button-rounded"></p-button>
+
+
+
+      </fieldset>
+      </form>
+      
+    </div>
+  </div>
+
 </div>

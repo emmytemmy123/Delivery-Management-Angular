@@ -3,6 +3,7 @@ body {
     padding-top:50px;
 }
 
+
 fieldset {
     border: thin solid #ccc; 
     border-radius: 4px;
@@ -17,12 +18,13 @@ legend {
 
 .form-control {
     width: 95%;
+    
 }
 
 label small {
     color: #678 !important;
 }
 span.req {
-    color:maroon;
+    color:rgb(0, 85, 128);
     font-size: 112%;
 }

@@ -7,33 +7,26 @@ import { FeaturesComponent } from './Pages/features/features/features.component'
 import { ServicesComponent } from './Pages/ourServices/services/services.component';
 import { ContactComponent } from './Pages/contact/contact/contact.component';
 import { RegistrationComponent } from './Pages/Register/registration/registration.component';
-import { LoginComponent } from './Pages/logIn/login/login.component';
 import { DeliveryComponent } from './Pages/delivery/delivery.component';
-import { UserDetailsComponent } from './Pages/user-details/user-details.component';
-import { AuthGuard } from './auth.guard';
-import { SecurityComponent } from './security/security.component';
-import { SignInTokenComponent } from './Pages/sign-in-token/sign-in-token.component';
-import { AccessDataLoadComponent } from './Pages/access-data-load/access-data-load.component';
 import { DriverComponent } from './Pages/driver/driver.component';
-import { UserPageComponent } from './Pages/user-page/user-page.component';
+import { Login3Component } from './Pages/login3/login3.component';
+import { ProfileComponent } from './Pages/profile/profile.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: "home", component: HomeComponent },
   {path: 'landing', component: LandingComponent},
-  {path: "login", component:LoginComponent},
   {path:'aboutUs', component: AboutUsComponent},
   {path:'features', component: FeaturesComponent},
   {path:'services', component: ServicesComponent},
   {path:'contact', component: ContactComponent},
   {path:'registration', component: RegistrationComponent},
-  {path:'delivery', component: DeliveryComponent},
+  {path:'delivery', component: DeliveryComponent, canActivate: [AuthGuard]},
   {path:'driver', component: DriverComponent},
-  {path:'security', component: SecurityComponent},
-  {path:'signInToken', component: SignInTokenComponent},
-  {path:'accessData', component:AccessDataLoadComponent},
-  {path:'userPage', component:UserPageComponent, canActivate: [AuthGuard]},
-  {path:'userDetails', component: UserDetailsComponent, canActivate: [AuthGuard] },
+  {path:'login3', component:Login3Component},
+  {path:'profile', component:ProfileComponent, canActivate: [AuthGuard] },
+
 
 
 

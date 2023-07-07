@@ -54,6 +54,7 @@
   <div class="container-fluid">
     <div class="row">
 
+
             <div class="col-sm-3 col-md-4 col-lg-3" style="padding-left: 20px;" >  
                 
                 <div class="card flex justify-content-center" style="padding: 20px;">    
@@ -70,105 +71,66 @@
                     <div >
 
                 <div>
-                        <p-button (click)="showDialog()" label="Edit Profile" styleClass="p-button-rounded"></p-button>
 
-                        <p-dialog header="Update Your Profile" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '40vw' }" [draggable]="false" [resizable]="false">
-                            <form >
 
-                                    <legend class="text-center" style="color: rgb(98, 98, 175);">Valid information is required to register. <span class="req"></span></legend>
-                                    <br>
-                                     <div class="form-group" >
-                                        <span class=" p-float-label">
-                                        <p-dropdown class="flex w-20rem" inputId="dropdown"  [autoDisplayFirst]="false" [options]="accountType" [showClear]="true"
-                                         optionLabel="name" optionValue="name"  name="account"  > </p-dropdown>
-                                          <label for="accountType" >Account Type</label>
-                                        </span>
-                                      </div>    
+                    <div *ngIf="isLoading">Loading...</div>
+
+                    <div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+                        <p-button (click)="showDialog()" label="Edit Profile" styleClass="p-button-rounded"></p-button>&nbsp;&nbsp;
+                        <p-button (click)="router.navigate(['/delivery'])" label="Delivery Order" styleClass="p-button-rounded"></p-button>
+
+
+                        <p-dialog header="Update Your Profile" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '400px' }" [draggable]="false" [resizable]="false">
+                            
+                            <form [formGroup]="userForm">
+
+                                    <legend class="text-center" style="color: rgb(98, 98, 175);">Update with a valid information. <span class="req"></span></legend>
+                                    <br>   
+                                    <div *ngIf="feedbackMessage" style="text-align: center;">
+                                        <p style="color: rgb(98, 187, 162); font-size: 24px;">{{ feedbackMessage }}</p>
+                                    </div>
                 
                 
                                         <div class="form-group">
-                                                    <span class="p-float-label" >
-                                                    <input required type="text"   id="name"  name="name" class="form-control" 
-                                                     maxlength="28" placeholder="Enter your fullname..." />
-                                                        <label for="Name"> Name:  </label>
-                                                    </span>
+                                                    <input required type="text"    name="name"  
+                                                     maxlength="28" placeholder="Enter your fullname..."  class="form-control"
+                                                     formControlName="nameControl"
+                                                     />                                                  
                                                 </div>
                 
                 
                                                 <div class="form-group">
-                                                    <span class="p-float-label" >
-                                                    <input required type="text"  name="email" id="email" 
-                                                    class="form-control" placeholder="Enter your email" />
-                                                        <label for="Email"> Email:  </label>
-                                                    </span>
+                                                    <input required type="text"  name="phone"  class="form-control" 
+                                                    placeholder="Enter your contact" 
+                                                    formControlName="phoneControl"
+                                                    />
+                                                      
                                                 </div>
                 
                                                 <div class="form-group">
-                                                    <span class="p-float-label" >
-                                                    <input required type="text"  name="phone" id="phone" 
-                                                    class="form-control" placeholder="Enter your contact" />
-                                                        <label for="Phone"> Phone:  </label>
-                                                    </span>
+                                                    <input required type="text"  name="address"   class="form-control"
+                                                    placeholder="Enter your address"
+                                                    formControlName="addressControl"/>
+                                                    
+                                                </div>
+                
+                
+                                                <div class="form-group">
+                                                    <input required type="text"   name="driverLicense"  
+                                                    placeholder="driverLicense" class="form-control"
+                                                    formControlName="driverLicenseControl"
+                                                    />
                                                 </div>
                 
                                                 <div class="form-group">
-                                                    <span class="p-float-label" >
-                                                    <input required type="text"  name="address" id="address" 
-                                                    class="form-control" placeholder="Enter your address" />
-                                                        <label for="Address"> Address:  </label>
-                                                    </span>
-                                                </div>
-                
-                                                <div class="form-group">
-                                                    <span class="p-float-label" >
-                                                    <input required type="text"  name="gender" id="gender" 
-                                                    class="form-control" placeholder="Select your sex" />
-                                                        <label for="Gender"> Gender:  </label>
-                                                    </span>
-                                                </div>
-                
-                                                <div class="form-group">
-                                                    <span class="p-float-label" >
-                                                    <input required type="text"  name="country" id="country" 
-                                                    class="form-control" placeholder="Nationality" />
-                                                        <label for="Country"> Country:  </label>
-                                                    </span>
-                                                </div>
-                
-                                                <div class="form-group">
-                                                    <span class="p-float-label" >
-                                                    <input required type="text"  name="city" id="city" class="form-control"
+                                                    <input required type="text"  name="city" 
+                                                     formControlName="cityControl" class="form-control"
                                                      placeholder="Enter your city" />
-                                                        <label for="City"> City:  </label>
-                                                    </span>
-                                                </div>
-                
-                                                <div class="form-group">
-                                                    <span class="p-float-label" >
-                                                    <input required type="text"  name="nin" id="nin" 
-                                                    class="form-control" placeholder="Enter your nin" />
-                                                        <label for="Nin"> Nin:  </label>
-                                                    </span>
-                                                </div>
-                
-                                                <div class="form-group">
-                                                    <span class="p-float-label" >
-                                                    <input required type="text"  name="username" id="username" class="form-control"
-                                                    placeholder="Enter your username" />
-                                                        <label for="Username"> Username:  </label>
-                                                    </span>
-                                                </div>
-                
-                                                <div class="form-group">
-                                                    <span class="p-float-label" >
-                                                    <input required type="password"  name="password" id="password" class="form-control"
-                                                    placeholder="Enter your password" />
-                                                        <label for="Password"> Password:  </label>
-                                                    </span>
                                                 </div>
                                         
                                                  
-                                                <p-button label="Update Profile" styleClass="p-button-rounded"></p-button>
+                                                <p-button label="Complete Your Profile" (click)="updateCurrentUser()" styleClass="p-button-rounded"></p-button>
               
                                                 
                             </form>
@@ -221,13 +183,15 @@
                 
                 <div >    
                                   
-                    <app-user-profile-carousel></app-user-profile-carousel>
+                    <!-- <app-user-profile-carousel></app-user-profile-carousel> -->
 
-                    </div>
+
+                 
 
 
             </div>
 
+            {{response}}
                 
     </div>
 

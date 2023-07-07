@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AccessDataLoadComponent } from './access-data-load.component';
+import { DeliveryFormComponent } from './delivery-form.component';
 
-describe('AccessDataLoadComponent', () => {
-  let component: AccessDataLoadComponent;
-  let fixture: ComponentFixture<AccessDataLoadComponent>;
+describe('DeliveryFormComponent', () => {
+  let component: DeliveryFormComponent;
+  let fixture: ComponentFixture<DeliveryFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccessDataLoadComponent ]
+      declarations: [ DeliveryFormComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AccessDataLoadComponent);
+    fixture = TestBed.createComponent(DeliveryFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

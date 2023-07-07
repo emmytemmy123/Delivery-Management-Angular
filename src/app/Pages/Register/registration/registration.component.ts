@@ -28,6 +28,8 @@ export class RegistrationComponent implements OnInit {
   responseMessage!: string;
 
 
+
+
   constructor(private usersService: UsersService, public router: Router) { 
     
     this.accountType = [
@@ -39,6 +41,11 @@ export class RegistrationComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.accountType = [
+      { name: "Sender" },
+      { name: "Driver" }  
+    ];
 
   }
 
@@ -65,20 +72,14 @@ export class RegistrationComponent implements OnInit {
         this.responseMessage = response.message;
         console.log('User saved:', response.data);
         console.log('Code:', response.code);
-
-        localStorage.setItem("saveUser", JSON.stringify(body));
-
       },
-      (error) => {
-        console.log('Error saving user:', error);
-      }
+   
     );
     this.clearFields();
   }
   
- 
   clearFields(): void {
-    this.users = new Users;// Reassign a new User object to clear the fields
+    this.users = new Users(); 
   }
 
 

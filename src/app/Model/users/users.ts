@@ -2,7 +2,6 @@
 
 export class Users {
 
-
     uuid!: string;
     accountType!: string;
     name!: string;
@@ -16,6 +15,7 @@ export class Users {
     nin!: number;
     username!: string;
     password!: string;
+    driverLicense!: string;
    
 }
 
@@ -24,5 +24,6 @@ export class ApiResponse{
     message!: string;
     code!: number;
     data:any;
+    status!: string;
 }
 

@@ -12,7 +12,7 @@ import {MegaMenuModule} from 'primeng/megamenu';
 import { HomeComponent } from './Pages/home/home.component';
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AutoTextFeildComponent } from './components/auto-text-feild/auto-text-feild.component';
 import { CalenderComponent } from './components/calender/calender.component';
 import { CalendarModule } from 'primeng/calendar';
@@ -63,21 +63,19 @@ import { FeaturesComponent } from './Pages/features/features/features.component'
 import { ContactComponent } from './Pages/contact/contact/contact.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { RegistrationComponent } from './Pages/Register/registration/registration.component';
-import { LoginComponent } from './Pages/logIn/login/login.component';
 import { DeliveryComponent } from './Pages/delivery/delivery.component';
-import { UserDetailsComponent } from './Pages/user-details/user-details.component';
 import { UsersService } from './Service/users.service';
-import { LoginService } from './Service/login.service';
 import { CardModule } from 'primeng/card';
-import { SecurityComponent } from './security/security.component';
-import { SignInTokenComponent } from './Pages/sign-in-token/sign-in-token.component';
-import { AccessDataLoadComponent } from './Pages/access-data-load/access-data-load.component';
 import { DriverComponent } from './Pages/driver/driver.component';
 import { AccordionComponent } from './components/accordion/accordion.component';
-import { UserPageComponent } from './Pages/user-page/user-page.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { UserProfileCarouselComponent } from './components/user-profile-carousel/user-profile-carousel.component';
 import { LocalStorageService } from './Service/local-storage.service';
+import { AuthInterceptor } from './auth.interceptor';
+import { Login3Component } from './Pages/login3/login3.component';
+import { ProfileComponent } from './Pages/profile/profile.component';
+import { DeliveryFormComponent } from './Pages/delivery-form/delivery-form.component';
+import { AuthenticationService } from './Service/authentication.service';
 
 
 
@@ -101,7 +99,6 @@ import { LocalStorageService } from './Service/local-storage.service';
     RadioButtonComponent,
     AutoPlayGalleryComponent,
     LandingComponent,
-    LoginComponent,
     AutoGalleryComponent,
     AboutUsComponent,
     FeaturesComponent,
@@ -109,15 +106,14 @@ import { LocalStorageService } from './Service/local-storage.service';
     ImageUploadComponent,
     RegistrationComponent,
     DeliveryComponent,
-    UserDetailsComponent,
-    SecurityComponent,
-    SignInTokenComponent,
-    AccessDataLoadComponent,
     DriverComponent,
     AccordionComponent,
-    UserPageComponent,
     DialogComponent,
-    UserProfileCarouselComponent
+    UserProfileCarouselComponent,
+    Login3Component,
+    ProfileComponent,
+    DeliveryFormComponent,
+    
     
     
   ],
@@ -182,8 +178,13 @@ import { LocalStorageService } from './Service/local-storage.service';
     ConfirmationService, 
     MessageService, 
     UsersService,
-    LoginService,
-    LocalStorageService
+    LocalStorageService,
+    AuthenticationService,
+  
+{  provide: HTTP_INTERCEPTORS,
+  useClass: AuthInterceptor,
+  multi: true
+}
     
    ]
 
