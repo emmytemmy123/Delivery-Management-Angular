@@ -40,6 +40,18 @@ export class AuthenticationService {
     return userUuid;
   }
 
+  getCurrentUserName(){
+    const userFromSession = this.getsession();
+    const dispatchName:any = userFromSession['name']
+    return dispatchName;
+  }
+
+  getCurrentUsersRoles() {
+    const userFromSession = this.getsession();
+    const userRoles:any = userFromSession['roles']
+    return userRoles;
+  }
+
   getToken(): any {
     return this.localServiceStorage.getItem('token');
   }

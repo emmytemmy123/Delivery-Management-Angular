@@ -16,6 +16,11 @@ export class UsersService {
   private baseUrl5 = 'http://localhost:8181/users/get/{uuid}';
   private baseUrl6 = 'http://localhost:8181/users/get/{username}';
   private baseUrl7 = 'http://localhost:8181/users/updateUsers/{username}';
+  private baseUrl8 = 'http://localhost:8181/users/email';
+  private baseUrl9 = 'http://localhost:8181/users/updateUsersPhoto';
+
+
+
 
 
   
@@ -39,6 +44,12 @@ export class UsersService {
     return this.http.put<ApiResponse>(`${this.baseUrl3}/${uuid}`, value);
   }
 
+  updateUsersPhoto(uuid: string, photo: File): Observable<ApiResponse> {
+    const formData = new FormData();
+    formData.append('photo', photo);
+    return this.http.put<ApiResponse>(`${this.baseUrl9}/${uuid}`, formData);
+  }
+
   deleteUsers(uuid: number): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(`${this.baseUrl4}/${uuid}`);
   }
@@ -49,6 +60,10 @@ export class UsersService {
 
   getUsersByUsername(username: string): Observable<ApiResponse>{
     return this.http.get<ApiResponse>(`${this.baseUrl6}/${username}`);
+  }
+
+  getUsersByEmail(email: string): Observable<ApiResponse>{
+    return this.http.get<ApiResponse>(`${this.baseUrl8}/${email}`);
   }
 
   updateUsersByUsername(username: string, value: any): Observable<ApiResponse> {

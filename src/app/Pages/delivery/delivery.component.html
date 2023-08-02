@@ -11,36 +11,32 @@
     
     <div class="align-items-center surface-0 flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full left-0 px-6 lg:px-0 z-2" style="top:85%">
         <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
-            <li>
-                <a (click)="router.navigate(['/driver'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>Driver</span>
-                </a>
-            </li>
-            <li>
-                <a (click)="router.navigate(['/driver'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>Sender </span>
-                </a>
-            </li>
-            <li>
-                <a (click)="router.navigate(['/features'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>How it Works</span>
-                </a>
-            </li>
-           
-            <li>
-                <a (click)="router.navigate(['/delivery'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>Open Deliveries</span>
-                </a>
-            </li>
+            
+          <li>
+            <a (click)="router.navigate(['/profile'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                <span>Home</span>
+            </a>
+        </li>
 
-            <li>
-                <a (click)="router.navigate(['/contacts'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>Contact</span>
-                </a>
-            </li>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li>
+            <a (click)="router.navigate(['/delivery'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                <span>Delivery Order</span>
+            </a>
+        </li>
 
-            <p style="color: rgb(114, 114, 175);"><strong >Welcome:</strong> {{ username }}</p>
+        <li>
+
+          <a (click)="dispatchDelivery()" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+              <span>My Delivery Orders</span>
+          </a>
+      </li>
+
+       
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <p style="color: rgb(114, 114, 175);"><strong >Welcome:</strong> {{ username }}</p>
 
           
         </ul>
@@ -51,13 +47,11 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-8">
 
-      <div *ngIf="feedbackMessage" style="text-align: center;">
-        <p style="color: rgb(98, 187, 162); font-size: 24px;">{{ feedbackMessage }}</p>
-    </div>
+    <div class="col-md-3">
+
 
     <form [formGroup]="productForm" (ngSubmit)="saveProducts()">
 
@@ -66,73 +60,67 @@
         <legend class="text-center">Make Your Delivery Request. <span class="req"></span></legend>
         <!-- Sender Information -->
 
+        <div *ngIf="feedbackMessage" style="text-align: center;">
+          <p style="color: rgb(98, 187, 162); font-size: 24px;">{{ feedbackMessage }}</p>
+      </div>
+
         <div class="form-group">
-          <span class="p-float-label" >
+          <label for="Name"> Receiver Name:  </label>
           <input required type="text"   id="dispatchTo" formControlName="dispatchTo"  class="form-control" />
-              <label for="Name"> Receiver Name:  </label>
-          </span>
         </div>
 
         <div class="form-group">
-          <span class="p-float-label" >
+          <label for="Name"> Receiver Address:  </label>
           <input required type="text"   id="dispatchToAddress" formControlName="dispatchToAddress"  class="form-control"  />
-              <label for="Name"> Receiver Address:  </label>
-          </span>
         </div>
 
-        <div class="form-group">
-          <span class="p-float-label" >
-          <input required type="text"   id="paymentMode" formControlName="paymentMode"  class="form-control"   />
-              <label for="Name"> paymentMode:  </label>
+      
+
+        <div class="form-group"  >
+          <span class=" p-float-label" >
+          <p-dropdown class="custom-dropdown" [style]="{'width':'100%'}"  [autoDisplayFirst]="false"
+           [options]="paymentMode" [showClear]="true"
+           optionLabel="name" optionValue="name"  name="name" formControlName="paymentMode" > </p-dropdown>
+            <label for="paymentMode" >Payment Mode</label>
           </span>
-        </div>
+        </div> 
 
         
+        
         <!-- Product List -->
-        <h3 style="font: 1em sans-serif;">Product List</h3>
-        <div formArrayName="productList">
+        <h3 style="font: 1em sans-serif;">Products</h3>
+        <div formArrayName="productList"  >
+
           <div *ngFor="let productGroup of productForm.get('productList').controls; let i = index" [formGroupName]="i">
             
             <div class="form-group">
-              <span class="p-float-label" >
+              <label for="Name"> Product Name:  </label>
               <input required type="text"   id="name" formControlName="name"  class="form-control"   />
-                  <label for="Name"> Product Name:  </label>
-              </span>
             </div>
 
             <div class="form-group">
-              <span class="p-float-label" >
+              <label for="Name"> Product Model:  </label>
               <input required type="text"   id="model" formControlName="model"  class="form-control"   />
-                  <label for="Name"> Product Model:  </label>
-              </span>
             </div>
 
             <div class="form-group">
-              <span class="p-float-label" >
+              <label for="Name"> Colour:  </label>
               <input required type="text"   id="colour" formControlName="colour"  class="form-control"  />
-                  <label for="Name"> Colour:  </label>
-              </span>
             </div>
 
             <div class="form-group">
-              <span class="p-float-label" >
+              <label for="Name"> Quantity:  </label>
               <input required type="text"   id="quantity" formControlName="quantity"  class="form-control"  />
-                  <label for="Name"> Quantity:  </label>
-              </span>
             </div>
             
             <div class="form-group">
-              <span class="p-float-label" >
+              <label for="Name"> Weight:  </label>
               <input required type="text"   id="weight" formControlName="weight"  class="form-control"   />
-                  <label for="Name"> Weight:  </label>
-              </span>
             </div>
            
             <div class="form-group">
-              <span class="p-float-label" >
+              <label for="Name"> Product Description:  </label>
               <textarea required type="text"   id="productDescription" formControlName="productDescription"  class="form-control"  ></textarea>
-                  <label for="Name"> Product Description:  </label>
-              </span>
             </div>
           
 
@@ -149,6 +137,77 @@
       </form>
       
     </div>
+
+
+    <div class="col-md-8">
+
+      <p-table [value]="productList.value" [rows]="10" [paginator]="true" responsiveLayout="scroll"  [rowHover]="true" 
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" >
+
+    <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-content-between">
+   <h5 class="m-0">List of Products</h5>
+    </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+    <tr>
+   <th style="width: 4rem">
+       <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+   </th>
+   <th pSortableColumn="name">Product Name <p-sortIcon field="name"></p-sortIcon></th>
+   <th pSortableColumn="model">Product Model <p-sortIcon field="model"></p-sortIcon></th>
+   <th pSortableColumn="colour">Colour <p-sortIcon field="colour"></p-sortIcon></th>
+   <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon></th>
+   <th pSortableColumn="weight">Weight <p-sortIcon field="weight"></p-sortIcon></th>
+   <th pSortableColumn="description">Action <p-sortIcon field="description"></p-sortIcon></th>
+  
+   <th></th>
+</tr>
+</ng-template>
+
+<ng-template pTemplate="body" let-product>
+  <tr>
+    <td>
+      <p-tableCheckbox></p-tableCheckbox>
+  </td>
+   <td>{{product.name}}</td>
+   <td>{{product.model}}</td>
+   <td>{{product.colour}}</td>
+   <td>{{product.quantity}}</td>
+   <td>{{product.weight}}</td>
+   <td>
+    <button  class="btn btn-info" style="margin-left: 10px">delete</button>
+   </td>
+
+
+   <!-- <td>
+       <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editCustomers(customer)"></button>
+       <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" dataKey="uuid" (click)="deleteCustomers(customer.uuid)"></button>
+   </td> -->
+
+</tr>
+</ng-template>
+
+<ng-template pTemplate="summary">
+<div class="flex align-items-center justify-content-between">
+   <!-- In total there are {{productList ? productList.length : 0 }} Products. -->
+</div>
+</ng-template>
+
+</p-table>
+
+
+    </div>
+
+
+
+
   </div>
 
 </div>
+
+
+
+
+

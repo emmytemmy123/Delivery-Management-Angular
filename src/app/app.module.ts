@@ -76,6 +76,18 @@ import { Login3Component } from './Pages/login3/login3.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { DeliveryFormComponent } from './Pages/delivery-form/delivery-form.component';
 import { AuthenticationService } from './Service/authentication.service';
+import { DispatchComponent } from './Admin/dispatch/dispatch.component';
+import { PaymentComponent } from './Admin/payment/payment.component';
+import { AdminLoginComponent } from './Admin/admin-login/admin-login.component';
+import { AdminPageComponent } from './Admin/admin-page/admin-page.component';
+import { DriverProfileComponent } from './Pages/driver-profile/driver-profile.component';
+import { DriverDeliveryComponent } from './Pages/driver-delivery/driver-delivery.component';
+import { FileUploadComponent } from './Pages/file-upload/file-upload.component';
+import { ImageModule } from 'primeng/image';
+import { DispatchService } from './Service/dispatch.service';
+import { DriverDispatchComponent } from './Pages/driver-dispatch/driver-dispatch.component';
+import { DriverPaymentComponent } from './Pages/driver-payment/driver-payment.component';
+
 
 
 
@@ -113,6 +125,16 @@ import { AuthenticationService } from './Service/authentication.service';
     Login3Component,
     ProfileComponent,
     DeliveryFormComponent,
+    DispatchComponent,
+    PaymentComponent,
+    AdminLoginComponent,
+    AdminPageComponent,
+    DriverProfileComponent,
+    DriverDeliveryComponent,
+    FileUploadComponent,
+    DriverDispatchComponent,
+    DriverPaymentComponent,
+    
     
     
     
@@ -163,7 +185,8 @@ import { AuthenticationService } from './Service/authentication.service';
     ReactiveFormsModule,
     CardModule,
     CommonModule,
-    AccordionModule
+    AccordionModule,
+    ImageModule
 
 
   ],
@@ -180,6 +203,7 @@ import { AuthenticationService } from './Service/authentication.service';
     UsersService,
     LocalStorageService,
     AuthenticationService,
+    DispatchService,
   
 {  provide: HTTP_INTERCEPTORS,
   useClass: AuthInterceptor,

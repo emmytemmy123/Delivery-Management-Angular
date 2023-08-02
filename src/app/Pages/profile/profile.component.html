@@ -11,33 +11,29 @@
     
     <div class="align-items-center surface-0 flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full left-0 px-6 lg:px-0 z-2" style="top:85%">
         <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
+
             <li>
-                <a (click)="router.navigate(['/driver'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>Driver</span>
-                </a>
-            </li>
-            <li>
-                <a (click)="router.navigate(['/driver'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>Sender </span>
-                </a>
-            </li>
-            <li>
-                <a (click)="router.navigate(['/features'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>How it Works</span>
-                </a>
-            </li>
-           
-            <li>
-                <a (click)="router.navigate(['/delivery'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>Open Deliveries</span>
+                <a (click)="router.navigate(['/profile'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Home</span>
                 </a>
             </li>
 
             <li>
-                <a (click)="router.navigate(['/contacts'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                    <span>Contact</span>
+                <a (click)="router.navigate(['/delivery'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Delivery Order</span>
                 </a>
             </li>
+
+            <li>
+
+                <a (click)="dispatchDelivery()" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>My Delivery Orders</span>
+                </a>
+            </li>
+
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
             <p style="color: rgb(114, 114, 175);"><strong >Welcome:</strong> {{ username }}</p>
@@ -60,6 +56,17 @@
                 <div class="card flex justify-content-center" style="padding: 20px;">    
                                   
                     <h5 style="align-items: center;">User Details</h5>
+
+    
+                    <div class="card flex justify-content-center">
+                        <p-image [src]="imageUrl" *ngIf="imageUrl" [preview]="true" alt="Image" width="250">
+                            <ng-template pTemplate="indicator">
+                                <i class="pi pi-check"></i>
+                            </ng-template>
+                        </p-image>
+                    </div> <br> <br>
+
+                    
                     <p><strong>UsersType:&nbsp;</strong> {{usersCategory}}</p>
                     <p><strong>Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> {{ name }}</p>
                     <p><strong>Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> {{ email }}</p>
@@ -79,6 +86,12 @@
 
                         <p-button (click)="showDialog()" label="Edit Profile" styleClass="p-button-rounded"></p-button>&nbsp;&nbsp;
                         <p-button (click)="router.navigate(['/delivery'])" label="Delivery Order" styleClass="p-button-rounded"></p-button>
+                        <br><br>
+
+                        <div class="card flex justify-content-center">
+                        <input type="file"  style="color: blue;" (change)="onFileSelected($event)"> 
+                        <p-button (click)="uploadPhoto()" styleClass="p-button-rounded">Upload File</p-button>     
+                        </div>
 
 
                         <p-dialog header="Update Your Profile" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '400px' }" [draggable]="false" [resizable]="false">
@@ -92,28 +105,55 @@
                                     </div>
                 
                 
-                                        <div class="form-group">
+                                                <div class="form-group">
                                                     <input required type="text"    name="name"  
                                                      maxlength="28" placeholder="Enter your fullname..."  class="form-control"
                                                      formControlName="nameControl"
                                                      />                                                  
                                                 </div>
-                
-                
+              
+
+                                                <!-- <div class="form-group"  >
+                                                    <span class=" p-float-label" >
+                                                    <p-autoComplete  [dropdown]="true" [style]="{'width':'100%'}"  (completeMethod)="filterCountry($event)" [options]="countries"
+                                                      [suggestions]="filteredCountries"  field="name" optionLabel="name" optionValue="name" name="name" formControlName="countryControl" > </p-autoComplete>
+                                                      <label for="countries" >Country</label>
+                                                    </span>
+                                                  </div>  -->
+
+                                                  <div class="form-group"  >
+                                                    <span class=" p-float-label" >
+                                                    <p-dropdown class="custom-dropdown" [style]="{'width':'100%'}"  [autoDisplayFirst]="false"
+                                                     [options]="countries" [showClear]="true"
+                                                     optionLabel="name" optionValue="name"  name="name" formControlName="countryControl" > </p-dropdown>
+                                                      <label for="countries" >Country</label>
+                                                    </span>
+                                                  </div> 
+
+
+
+                                                <div class="form-group">
+                                                    <input required type="text"  name="city"  class="form-control" 
+                                                    placeholder="Enter your City" 
+                                                    formControlName="cityControl"
+                                                    />                                                     
+                                                </div>
+
                                                 <div class="form-group">
                                                     <input required type="text"  name="phone"  class="form-control" 
-                                                    placeholder="Enter your contact" 
+                                                    placeholder="Enter your Phone" 
                                                     formControlName="phoneControl"
-                                                    />
-                                                      
+                                                    />                                                     
                                                 </div>
-                
-                                                <div class="form-group">
-                                                    <input required type="text"  name="address"   class="form-control"
-                                                    placeholder="Enter your address"
-                                                    formControlName="addressControl"/>
-                                                    
-                                                </div>
+
+                                                <div class="form-group"  >
+                                                    <span class=" p-float-label" >
+                                                    <p-dropdown class="custom-dropdown" [style]="{'width':'100%'}"  [autoDisplayFirst]="false"
+                                                     [options]="genders" [showClear]="true"
+                                                     optionLabel="gender" optionValue="gender"  name="gender" formControlName="genderControl" > </p-dropdown>
+                                                      <label for="genders" >Gender</label>
+                                                    </span>
+                                                  </div> 
                 
                 
                                                 <div class="form-group">
@@ -122,12 +162,7 @@
                                                     formControlName="driverLicenseControl"
                                                     />
                                                 </div>
-                
-                                                <div class="form-group">
-                                                    <input required type="text"  name="city" 
-                                                     formControlName="cityControl" class="form-control"
-                                                     placeholder="Enter your city" />
-                                                </div>
+            
                                         
                                                  
                                                 <p-button label="Complete Your Profile" (click)="updateCurrentUser()" styleClass="p-button-rounded"></p-button>
@@ -181,18 +216,8 @@
 
             <div class="col-sm-3 col-md-4 col-lg-3" style="padding-right: -20px;" >  
                 
-                <div >    
-                                  
-                    <!-- <app-user-profile-carousel></app-user-profile-carousel> -->
-
-
-                 
-
-
-            </div>
-
-            {{response}}
-                
-    </div>
+                <app-auto-play-gallery style="right:10%; width: 500px; height: 300px;"></app-auto-play-gallery>
+        
+             </div>
 
 </div>

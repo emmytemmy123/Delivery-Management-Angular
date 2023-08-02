@@ -1,0 +1,156 @@
+
+
+<div class="py-4 px-4 mx-0 md:mx-6 lg:mx-4 lg:px-4 flex align-items-center justify-content-between relative lg:static mb-3  " >
+            
+    <a class="flex align-items-center" href="#">
+        <img src="assets/image/landing/logo.jpg" alt="Sakai Logo" height="50" class="mr-0 lg:mr-2">
+        <span class="text-900 font-medium text-1xl line-height-3 mr-8">Admin Page</span>
+    </a>
+  
+    <a pRipple class="cursor-pointer block lg:hidden text-700" pStyleClass="@next" enterClass="hidden" leaveToClass="hidden" [hideOnOutsideClick]="true">
+        <i class="pi pi-bars text-4xl"></i>
+    </a>
+    
+    <div class="align-items-center surface-0 flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full left-0 px-6 lg:px-0 z-2" style="top:85%">
+        <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
+           
+            <li>
+                <a (click)="router.navigate(['/driverProfile'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Home</span>
+                </a>
+            </li>
+          
+
+           
+           
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+            <p style="color: rgb(114, 114, 175);"><strong >Welcome:</strong> {{ username }}</p>
+  
+          
+        </ul>
+        <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
+            <!-- <button pButton [routerLink]="'/registration'" pRipple label="SignUp" class="p-button-rounded border-none ml-5 font-light line-height-2 bg-blue-500 text-white"></button> -->
+            <button (click)="logout()" pButton  pRipple label="logOut" class="p-button-rounded border-none ml-5 font-light line-height-2 bg-blue-500 text-white"></button>
+        </div>
+    </div>
+  </div>
+  
+
+  <div class="container-fluid">
+    <div class="row">
+
+
+        <div class="col-md-3">
+
+            <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title" style="color: rgb(86, 139, 139);">Make a Payment</h4>
+              
+                  <div *ngIf="responseMessage" style="text-align: center;">
+                    <p style="color: rgb(98, 187, 162); font-size: 24px;">{{ responseMessage }}</p>
+                </div>
+                  
+                  <form (submit)="makePayment()"> <br>
+              
+              
+                    <div class="form-group">
+                        <label for="deliveryNo"> DeliveryNo:  </label>
+                      <input required type="text"  name="deliveryNo" id="deliveryNo" [(ngModel)]="deliveryNo" class="form-control" />
+                    </div>
+              
+              
+                    <div class="form-group">
+                        <label for="dispatchDeliveryNo"> Dispatch DeliveryNo:  </label>
+                      <input required type="text"  name="dispatchDeliveryNo" id="dispatchDeliveryNo" [(ngModel)]="dispatchDeliveryNo" class="form-control"  />
+                    </div>
+              
+                    <button type="submit" class="btn btn-primary btn-block">Payment</button>
+              
+                  </form>
+              
+                </div>
+              </div>
+
+        </div>
+
+
+        <div class="col-md-9">
+
+            <p-table #dt [value]="disp"  [rows]="10" [paginator]="true" [globalFilterFields]="['deliveryNo','paidBy','paidTo','paymentDate']" 
+            responsiveLayout="scroll" [(selection)]="selectedPayments" [rowHover]="true" dataKey="uuid"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+            
+            <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+               <h5 class="m-0">Manage Dispatched Payment </h5>
+               <span class="p-input-icon-left">
+                   <i class="pi pi-search"></i>
+                   <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" class="w-full sm:w-auto" placeholder="Search...." />
+               </span>
+            </div>
+            </ng-template>
+            
+            <ng-template pTemplate="header">
+            <tr>
+               <th style="width: 4rem">
+                   <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+               </th>
+               <th pSortableColumn="deliveryNo">DeliveryNo <p-sortIcon field="deliveryNo"></p-sortIcon></th>
+               <th pSortableColumn="postedBy">PaidBy <p-sortIcon field="postedBy"></p-sortIcon></th>
+               <th pSortableColumn="receiverAddress">PaidTo <p-sortIcon field="receiverAddress"></p-sortIcon></th>
+               <th pSortableColumn="receiverName">Payment Date <p-sortIcon field="receiverName"></p-sortIcon></th>
+               <th pSortableColumn="totalQuantity">Payment Mode <p-sortIcon field="totalQuantity"></p-sortIcon></th>
+               <th pSortableColumn="status">Amount Paid  <p-sortIcon field="status"></p-sortIcon></th>
+               <th pSortableColumn="paymentStatus">Payment Status <p-sortIcon field="paymentStatus"></p-sortIcon></th>
+            
+               <th></th>
+            </tr>
+            </ng-template>
+            
+            <ng-template pTemplate="body" let-payment>
+            <tr [pEditableRow]="disp">
+               <td>
+                   <p-tableCheckbox [value]="disp"></p-tableCheckbox>
+               </td>
+               <td>{{payment.deliveryNo}}</td>
+               <td>{{payment.paidBy}}</td>
+               <td>{{payment.paidTo}}</td>
+               <td>{{payment.paymentDate}}</td>
+               <td>{{payment.paymentMode}}</td>
+               <td>{{payment.amountPaid}}</td>
+               <td>{{payment.status}}</td>
+            
+            
+               <!-- <td>
+                   <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editCustomers(customer)"></button>
+                   <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" dataKey="uuid" (click)="deleteCustomers(customer.uuid)"></button>
+               </td> -->
+            
+            </tr>
+            </ng-template>
+            
+            <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+               In total there are {{payments ? payments.length : 0 }} Payment.
+            </div>
+            </ng-template>
+            
+            </p-table>
+
+        </div>
+
+
+    </div>
+  </div>
+
+
+
+  
+
+  
+
+
+ 

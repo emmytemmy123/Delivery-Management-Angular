@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/Model/products/product';
 import { AuthenticationService } from 'src/app/Service/authentication.service';
 import { DeliveryService } from 'src/app/Service/delivery.service';
 
@@ -11,9 +12,13 @@ import { DeliveryService } from 'src/app/Service/delivery.service';
 })
 export class DeliveryComponent implements OnInit {
 
+  selectedProductList:any;
   productForm: any;
-  delivery: any;
+
+  product!: Product[];
+
   response: any;
+
   usersCategory: any;
   address: any;
   city: any;
@@ -22,17 +27,26 @@ export class DeliveryComponent implements OnInit {
   phone: any;
   name: any;
   username: any;
+
   userForm: any;
+
   feedbackMessage:any;
+
+  paymentMode!: any[];
 
 
   constructor(public router: Router, private deliveryService: DeliveryService,
      private authService: AuthenticationService,  private formBuilder: FormBuilder) {
 
+      this.paymentMode=[
+      {name: "cash"},
+      {name: "transfer"}
+      ]
+
+
       this.createProductForm();
-
-
   }
+
 
   ngOnInit(): void {
 
@@ -41,6 +55,7 @@ export class DeliveryComponent implements OnInit {
     this.createProductForm();
 
   }
+
 
   retrieveUserFromSeesion(){
     const userDetailFromSession = this.authService.getsession();
@@ -66,7 +81,8 @@ export class DeliveryComponent implements OnInit {
     });
   }
 
-  saveProducts() {
+
+  saveProducts2() {
     const uuidFromSession =  this.authService.getCurrentUsersDetails();
     console.log( "uuid", uuidFromSession);
 
@@ -77,14 +93,14 @@ export class DeliveryComponent implements OnInit {
       const payload = {
         items: [
           {
-            colour: formData.productList[0].colour,
-            description: formData.productList[0].description,
-            model: formData.productList[0].model,
-            name: formData.productList[0].name,
-            photo: formData.productList[0].photo,
-            quantity: formData.productList[0].quantity,
-            status: formData.productList[0].status,
-            weight: formData.productList[0].weight
+            colour: formData.productList[10].colour,
+            description: formData.productList[10].description,
+            model: formData.productList[10].model,
+            name: formData.productList[10].name,
+            photo: formData.productList[10].photo,
+            quantity: formData.productList[10].quantity,
+            status: formData.productList[10].status,
+            weight: formData.productList[10].weight
           }
         ],
         paymentMode: formData.paymentMode,
@@ -108,6 +124,64 @@ export class DeliveryComponent implements OnInit {
   }
   }
 
+
+
+  saveProducts() {
+    const uuidFromSession = this.authService.getCurrentUsersDetails();
+    console.log("uuid", uuidFromSession);
+  
+    if (uuidFromSession) {
+      if (this.productForm) {
+        const formData = this.productForm.value;
+  
+        const items = formData.productList.map((product: any) => {
+          return {
+            colour: product.colour,
+            description: product.description,
+            model: product.model,
+            name: product.name,
+            photo: product.photo,
+            quantity: product.quantity,
+            status: product.status,
+            weight: product.weight
+          };
+        });
+  
+        const payload = {
+          items: items,
+          paymentMode: formData.paymentMode,
+          receiverAddress: formData.dispatchToAddress,
+          receiverName: formData.dispatchTo,
+          senderId: uuidFromSession
+        };
+  
+        this.deliveryService.addDelivery(payload).subscribe(
+          (response) => {
+
+            if(response.code == "200"){
+              this.feedbackMessage = "Your Delivery Order is Successful"
+            }
+            else{
+              this.feedbackMessage = "Order Decline"
+            }
+
+          },
+          (error) => {
+            console.error("Error adding delivery:", error);
+            // Handle error appropriately (e.g., show error message to the user)
+          }
+        );
+  
+        console.log("Form Data:", formData);
+        this.productForm.reset();
+      } else {
+        // Handle form validation errors if needed
+        console.log("Form is invalid. Cannot save products.");
+      }
+    }
+  }
+  
+
   
   addProduct() {
     const productGroup = this.formBuilder.group({
@@ -118,13 +192,18 @@ export class DeliveryComponent implements OnInit {
       status: ['', Validators.required],
       weight: ['', Validators.required],
       description: ['']
-      // Add more fields for each product as needed
     });
     this.productList.push(productGroup);
   }
 
+
+    // Method to remove a product from the product list form array
+    removeProduct(index: number) {
+      this.productList.removeAt(index);
+    }
+    
   
-  get productList() {
+  get productList(): FormArray {
     return this.productForm.get('productList') as FormArray;
   }
   
@@ -132,8 +211,16 @@ export class DeliveryComponent implements OnInit {
   logout(){
     localStorage.removeItem('token');
     sessionStorage.removeItem('data');
-    this.router.navigate(['/login3']);
+    this.router.navigate(['/home']);
   }
+
+
+  dispatchDelivery(){
+    const name = this.authService.getCurrentUserName();
+    console.log(name);
+    this.router.navigate(['openDelivery', name]);
+  }
+
 
 
 

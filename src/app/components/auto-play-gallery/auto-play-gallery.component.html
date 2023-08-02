@@ -2,7 +2,8 @@
 
  
 <p-galleria [value]="images"   [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '1900px'}"
- [numVisible]="5" [circular]="true" [autoPlay]="true" > 
+ [numVisible]="5" [circular]="true" [autoPlay]="true"  [showThumbnails]="false" [showItemNavigators]="false" 
+ [showItemNavigatorsOnHover]="false" [showIndicators]="false" > 
 
 <ng-template pTemplate="item" let-item>
     <img [src]="item.previewImageSrc" id="autoplay" />
@@ -11,10 +12,3 @@
 </p-galleria>
 
 
-<p-carousel [value]="images" [autoplayInterval]="3000">
-    <!-- Carousel content here -->
-    <ng-template pTemplate="header">
-      <span class="carousel-autoplay-indicator" *ngIf="autoplay">Autoplay Enabled</span>
-    </ng-template>
-    
-  </p-carousel>

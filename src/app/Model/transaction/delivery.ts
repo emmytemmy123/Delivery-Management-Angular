@@ -1,7 +1,6 @@
 
 export interface Delivery{
 
-    deliveryNo: String; 
     totalDeliveryAmount: number;
     totalAmountDue: number; 
     deliveryStatus: String; 
@@ -13,6 +12,9 @@ export interface Delivery{
     postedBy: String; 
     deliverBy: String; 
     dispatchTo: String; 
+    paymentStatus: string;
+    deliveryNo: string;
+
 
 }
 

@@ -2,7 +2,6 @@
 
 export class Users {
 
-    uuid!: string;
     accountType!: string;
     name!: string;
     email!: string;
@@ -22,7 +21,7 @@ export class Users {
 
 export class ApiResponse{
     message!: string;
-    code!: number;
+    code!: string;
     data:any;
     status!: string;
 }

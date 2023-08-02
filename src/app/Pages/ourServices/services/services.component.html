@@ -28,12 +28,7 @@
                             <span>How it Works</span>
                         </a>
                     </li>
-                   
-                    <li>
-                        <a (click)="router.navigate(['/delivery'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                            <span>Open Deliveries</span>
-                        </a>
-                    </li>
+                  
 
                     <li>
                         <a (click)="router.navigate(['/contacts'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
@@ -42,10 +37,7 @@
                     </li>
                   
                 </ul>
-            <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
-                    <button pButton  pRipple label="Login" class="p-button-text p-button-rounded border-none font-light line-height-2 text-blue-500"></button>
-                    <button pButton  pRipple label="Booking" class="p-button-rounded border-none ml-5 font-light line-height-2 bg-blue-500 text-white"></button>
-                </div>
+          
             </div>
         </div>
 
@@ -116,45 +108,50 @@
         </div>
 
        
-        <div class="py-4 px-4 mx-0 mt-8 lg:mx-8 border-bluegray-700 ">
-            <div class="grid justify-content-between flex bg-blue-100 ">
-                <div class="col-12 md:col-2" style="margin-top:-1.5rem;">
-                  
+        <div class="py-4 px-4 mx-0 mt-8 lg:mx-8 flex border-bluegray-700 flex bg-cyan-700 ">
+            <div class="grid justify-content-between  ">
+                
+                <div class="col-12 md:col-2" style="margin-top:1rem;">
+                    <a class="flex align-items-center" href="/home">
+                        <img src="assets/image/landing/logo.jpg"  height="50" class="mr-0 lg:mr-2">
+                        <span class="text-900 font-medium text-1xl line-height-3 text-white mr-8">Emmadex Delivery</span>
+                    </a>
                 </div>
     
                 <div class="col-12 md:col-10 lg:col-7">
                     <div class="grid text-center md:text-left">
                         <div class="col-12 md:col-3">
-                            <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Company</h4>
-                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">About Us</a>
-                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">News</a>
-                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Investor Relations</a>
-                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Careers</a>
-                            <a class="line-height-3 text-xl block cursor-pointer text-700">Media Kit</a>
+                            <h4 class="font-medium text-2xl line-height-3 mb-3 text-white">Company</h4>
+                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-white">About Us</a>
+                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-white">News</a>
+                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-white">Investor Relations</a>
+                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-white">Careers</a>
+                            <a class="line-height-3 text-xl block cursor-pointer text-white">Media Kit</a>
                         </div>
                         
                         <div class="col-12 md:col-3 mt-4 md:mt-0">
-                            <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Resources</h4>
-                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Get Started</a>
-                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Learn</a>
-                            <a class="line-height-3 text-xl block cursor-pointer text-700">Case Studies</a>
+                            <h4 class="font-medium text-2xl line-height-3 mb-3 text-white">Resources</h4>
+                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-white">Get Started</a>
+                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-white">Learn</a>
+                            <a class="line-height-3 text-xl block cursor-pointer text-white">Case Studies</a>
                         </div>
         
                         <div class="col-12 md:col-3 mt-4 md:mt-0">
-                            <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Community</h4>
-                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Discord</a>
-                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Events<img src="assets/demo/images/landing/new-badge.svg" class="ml-2"/></a>
-                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">FAQ</a>
-                            <a class="line-height-3 text-xl block cursor-pointer text-700">Blog</a>
+                            <h4 class="font-medium text-2xl line-height-3 mb-3 text-white">Legal</h4>
+                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-white">Brand Policy</a>
+                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-white">Privacy Policy</a>
+                            <a class="line-height-3 text-xl block cursor-pointer text-white">Terms of Service</a>
                         </div>
-        
+
                         <div class="col-12 md:col-3 mt-4 md:mt-0">
-                            <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Legal</h4>
-                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Brand Policy</a>
-                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Privacy Policy</a>
-                            <a class="line-height-3 text-xl block cursor-pointer text-700">Terms of Service</a>
+                            <h4 class="font-medium text-2xl line-height-3 mb-3 text-white">Contact</h4>
+                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-white">Address:</a>
+                            <a class="line-height-3 text-xl block cursor-pointer mb-2 text-white">08140004346</a>
+                            <a class="line-height-3 text-xl block cursor-pointer text-white">Emmytemmyeli@gmail.com</a>
                         </div>
+
                     </div>
+
                 </div>
             </div>
         </div>

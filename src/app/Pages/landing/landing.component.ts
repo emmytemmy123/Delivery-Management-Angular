@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../Service/app.layout.service';
+import { AuthenticationService } from 'src/app/Service/authentication.service';
 
 @Component({
     selector: 'app-landing',
@@ -60,7 +61,32 @@ import { LayoutService } from '../../Service/app.layout.service';
     `]
 })
 export class LandingComponent {
+    usersCategory: any;
+    address: any;
+    city: any;
+    email: any;
+    gender: any;
+    phone: any;
+    name: any;
+    username: any;
 
 
-    constructor(public layoutService: LayoutService, public router: Router) { }
+    constructor(public layoutService: LayoutService, public router: Router, 
+         private authService:AuthenticationService) { }
+
+       
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
 }

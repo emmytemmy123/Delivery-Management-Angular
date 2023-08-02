@@ -67,16 +67,20 @@ export class RegistrationComponent implements OnInit {
   
     };
 
-    this.usersService.createUsers(this.users).subscribe(
-      (response: ApiResponse) => {
-        this.responseMessage = response.message;
-        console.log('User saved:', response.data);
-        console.log('Code:', response.code);
-      },
-   
-    );
+    this.usersService.createUsers(this.users).subscribe((response) => {
+
+        if(response.data == "200"){
+          this.responseMessage = ("Registration Successfull")
+        }
+        else{
+          this.responseMessage = ("Valid Information is Required");
+        }
+
+      });
     this.clearFields();
   }
+
+  
   
   clearFields(): void {
     this.users = new Users(); 

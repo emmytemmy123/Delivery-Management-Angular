@@ -1,0 +1,228 @@
+
+<div class="py-4 px-4 mx-0 md:mx-6 lg:mx-4 lg:px-4 flex align-items-center justify-content-between relative lg:static mb-3  " >
+            
+    <a class="flex align-items-center" href="#">
+        <img src="assets/image/landing/logo.jpg" alt="Sakai Logo" height="50" class="mr-0 lg:mr-2">
+        <span class="text-900 font-medium text-1xl line-height-3 mr-8">Emmadex Delivery</span>
+    </a>
+
+    <a pRipple class="cursor-pointer block lg:hidden text-700" pStyleClass="@next" enterClass="hidden" leaveToClass="hidden" [hideOnOutsideClick]="true">
+        <i class="pi pi-bars text-4xl"></i>
+    </a>
+    
+    <div class="align-items-center surface-0 flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full left-0 px-6 lg:px-0 z-2" style="top:85%">
+        <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
+
+            <li>
+                <a (click)="router.navigate(['/driverProfile'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Home</span>
+                </a>
+            </li>
+
+            <li>
+
+                <a (click)="dispatchDelivery()" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>My Dispatch</span>
+                </a>
+            </li>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <p style="color: rgb(114, 114, 175);"><strong >Welcome:</strong> {{ username }}</p>
+
+          
+        </ul>
+        <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
+            <!-- <button pButton [routerLink]="'/registration'" pRipple label="SignUp" class="p-button-rounded border-none ml-5 font-light line-height-2 bg-blue-500 text-white"></button> -->
+            <button (click)="logout()" pButton  pRipple label="logOut" class="p-button-rounded border-none ml-5 font-light line-height-2 bg-blue-500 text-white"></button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="responseMessage" style="text-align: center;">
+    <p style="color: rgb(98, 187, 162); font-size: 24px;">{{ responseMessage }}</p>
+</div>
+
+  <div class="container-fluid">
+    <div class="row">
+
+
+            <div class="col-sm-3 col-md-4 col-lg-3" style="padding-left: 20px;" >  
+                
+                <div class="card flex justify-content-center" style="padding: 20px;">    
+                                  
+                    <h5 style="align-items: center;">User Details</h5>
+
+
+                    <div class="card flex justify-content-center">
+                        <p-image [src]="imageUrl" *ngIf="imageUrl" [preview]="true" alt="Image" width="250">
+                            <ng-template pTemplate="indicator">
+                                <i class="pi pi-check"></i>
+                            </ng-template>
+                        </p-image>
+                    </div> <br> <br>
+
+
+                    <p><strong>User:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> {{usersCategory}}</p>
+                    <p><strong>Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> {{ name }}</p>
+                    <p><strong>Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> {{ email }}</p>
+                    <p><strong>Address:&nbsp;&nbsp;&nbsp;&nbsp;</strong> {{ address }}</p>
+                    <p><strong>Phone:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> {{ phone }}</p>
+                    <p><strong>Gender:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> {{ gender }}</p>
+                    <p><strong>City:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> {{ city }}</p>
+
+                    <div >
+
+                <div>
+
+
+                    <div *ngIf="isLoading">Loading...</div>
+
+                    <div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+                        <p-button (click)="showDialog()" label="Edit Profile" styleClass="p-button-rounded"></p-button>
+                        <!-- <p-button (click)="router.navigate(['/delivery'])" label="Delivery Order" styleClass="p-button-rounded"></p-button> -->
+
+                        <br>
+                        <div class="card flex justify-content-center">
+                            <input type="file"  style="color: blue;" (change)="onFileSelected($event)"> 
+                            <p-button (click)="uploadPhoto()" styleClass="p-button-rounded" >Upload File</p-button>     
+                            </div>
+
+
+                            <p-dialog header="Update Your Profile" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }"
+                             [style]="{ width: '400px' }" [draggable]="false" [resizable]="false">
+                            
+                                <form [formGroup]="userForm">
+    
+                                        <legend class="text-center" style="color: rgb(98, 98, 175);">Update with a valid information. <span class="req"></span></legend>
+                                        <br>   
+                                        <div *ngIf="feedbackMessage" style="text-align: center;">
+                                            <p style="color: rgb(98, 187, 162); font-size: 24px;">{{ feedbackMessage }}</p>
+                                        </div>
+                    
+                    
+                                                    <div class="form-group">
+                                                        <input required type="text"    name="name"  
+                                                         maxlength="28" placeholder="Enter your fullname..."  class="form-control"
+                                                         formControlName="nameControl"
+                                                         />                                                  
+                                                    </div>
+                  
+    
+                                                    <!-- <div class="form-group"  >
+                                                        <span class=" p-float-label" >
+                                                        <p-autoComplete  [dropdown]="true" [style]="{'width':'100%'}"  (completeMethod)="filterCountry($event)" [options]="countries"
+                                                          [suggestions]="filteredCountries"  field="name" optionLabel="name" optionValue="name" name="name" formControlName="countryControl" > </p-autoComplete>
+                                                          <label for="countries" >Country</label>
+                                                        </span>
+                                                      </div>  -->
+    
+                                                      <div class="form-group"  >
+                                                        <span class=" p-float-label" >
+                                                        <p-dropdown class="custom-dropdown" [style]="{'width':'100%'}"  [autoDisplayFirst]="false"
+                                                         [options]="countries" [showClear]="true"
+                                                         optionLabel="name" optionValue="name"  name="name" formControlName="countryControl" > </p-dropdown>
+                                                          <label for="countries" >Country</label>
+                                                        </span>
+                                                      </div> 
+    
+    
+    
+                                                    <div class="form-group">
+                                                        <input required type="text"  name="city"  class="form-control" 
+                                                        placeholder="Enter your City" 
+                                                        formControlName="cityControl"
+                                                        />                                                     
+                                                    </div>
+    
+                                                    <div class="form-group">
+                                                        <input required type="text"  name="phone"  class="form-control" 
+                                                        placeholder="Enter your Phone" 
+                                                        formControlName="phoneControl"/>                                                     
+                                                    </div>
+    
+                                                    <div class="form-group"  >
+                                                        <span class=" p-float-label" >
+                                                        <p-dropdown class="custom-dropdown" [style]="{'width':'100%'}"  [autoDisplayFirst]="false"
+                                                         [options]="genders" [showClear]="true"
+                                                         optionLabel="gender" optionValue="gender"  name="gender" formControlName="genderControl" > </p-dropdown>
+                                                          <label for="genders" >Gender</label>
+                                                        </span>
+                                                      </div> 
+                    
+                    
+                                                    <div class="form-group">
+                                                        <input required type="text"   name="driverLicense"  
+                                                        placeholder="driverLicense" class="form-control"
+                                                        formControlName="driverLicenseControl"
+                                                        />
+                                                    </div>
+                
+                                            
+                                                     
+                                                    <p-button label="Complete Your Profile" (click)="updateCurrentUser()" styleClass="p-button-rounded"></p-button>
+                  
+                                                    
+                                </form>
+                            </p-dialog>
+
+                    </div>
+
+                    </div>
+
+                  </div>
+                  <br>
+
+                
+
+
+            </div>
+
+
+            <div class="col-sm-3 col-md-4 col-lg-6" >  
+                
+                <div class="card flex justify-content-center" >    
+                                  
+                    <p-accordion [multiple]="true" [activeIndex]="[0]">
+                        <p-accordionTab header="Header I">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                        </p-accordionTab>
+                        <p-accordionTab header="Header II">
+                            <p>
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
+                                ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
+                            </p>
+                        </p-accordionTab>
+                        <p-accordionTab header="Header III">
+                            <p>
+                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+                                qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+                            </p>
+                        </p-accordionTab>
+                    </p-accordion>
+
+                    </div>
+
+            </div>
+                
+
+            <div class="col-sm-3 col-md-4 col-lg-3"  >  
+                
+                <app-auto-play-gallery style="right:10%; width: 500px; height: 300px;"></app-auto-play-gallery>
+        
+             </div>   
+                                  
+
+
+                 
+
+
+                
+    </div>
+
