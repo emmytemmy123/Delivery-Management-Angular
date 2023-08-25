@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiResponse, Users } from 'src/app/Model/users/users';
 import { UsersService } from 'src/app/Service/users.service';
@@ -23,26 +23,38 @@ export class RegistrationComponent implements OnInit {
 
   submitted = false;
 
-  accountType!: any[];
+  userCategory!: any[];
 
   responseMessage!: string;
+  form: FormGroup;
 
 
 
 
-  constructor(private usersService: UsersService, public router: Router) { 
+  constructor(private usersService: UsersService, public router: Router, private fb: FormBuilder) { 
     
-    this.accountType = [
+    this.userCategory = [
       { name: "Sender" },
       { name: "Driver" }  
     ];
+
+
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      phone: ['', Validators.required],
+      address: ['', Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+  });
+
 
   }
 
 
   ngOnInit(): void {
 
-    this.accountType = [
+    this.userCategory = [
       { name: "Sender" },
       { name: "Driver" }  
     ];
@@ -53,7 +65,7 @@ export class RegistrationComponent implements OnInit {
   saveUsers() {
 
    const body =  {
-      accountType: this.users.accountType,
+      userCategory: this.users.userCategory,
       name: this.users.name,
       email: this.users.email,
       phone: this.users.phone,
@@ -73,12 +85,26 @@ export class RegistrationComponent implements OnInit {
           this.responseMessage = ("Registration Successfull")
         }
         else{
-          this.responseMessage = ("Valid Information is Required");
+          this.responseMessage = ("Registration not Successfull");
         }
 
       });
     this.clearFields();
   }
+
+
+  // Inside your component class
+hasEmptyRequiredFields(): boolean {
+  return (
+      !this.users.name ||
+      !this.users.email ||
+      !this.users.phone ||
+      !this.users.address ||
+      !this.users.username ||
+      !this.users.password
+  );
+}
+
 
   
   

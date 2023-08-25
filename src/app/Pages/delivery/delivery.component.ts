@@ -76,6 +76,7 @@ export class DeliveryComponent implements OnInit {
       dispatchTo: ['', Validators.required],
       dispatchToAddress: ['', Validators.required],
       paymentMode: ['', Validators.required],
+      dispatchDate: ['', Validators.required],
       senderId: ['', Validators.required],
       productList: this.formBuilder.array([])
     });
@@ -125,6 +126,20 @@ export class DeliveryComponent implements OnInit {
   }
 
 
+  addProduct() {
+    const productGroup = this.formBuilder.group({
+      colour: ['', Validators.required],
+      model: ['', Validators.required],
+      name: ['', Validators.required],
+      quantity: ['', Validators.required],
+      status: ['', Validators.required],
+      weight: ['', Validators.required],
+      productDescription: ['', Validators.required],
+    });
+    this.productList.push(productGroup);
+  }
+
+
 
   saveProducts() {
     const uuidFromSession = this.authService.getCurrentUsersDetails();
@@ -137,12 +152,11 @@ export class DeliveryComponent implements OnInit {
         const items = formData.productList.map((product: any) => {
           return {
             colour: product.colour,
-            description: product.description,
+            description: product.productDescription,
             model: product.model,
             name: product.name,
             photo: product.photo,
             quantity: product.quantity,
-            status: product.status,
             weight: product.weight
           };
         });
@@ -151,9 +165,12 @@ export class DeliveryComponent implements OnInit {
           items: items,
           paymentMode: formData.paymentMode,
           receiverAddress: formData.dispatchToAddress,
+          dispatchDate: formData.dispatchDate,
           receiverName: formData.dispatchTo,
           senderId: uuidFromSession
         };
+
+        console.log(payload);
   
         this.deliveryService.addDelivery(payload).subscribe(
           (response) => {
@@ -181,20 +198,6 @@ export class DeliveryComponent implements OnInit {
     }
   }
   
-
-  
-  addProduct() {
-    const productGroup = this.formBuilder.group({
-      colour: ['', Validators.required],
-      model: ['', Validators.required],
-      name: ['', Validators.required],
-      quantity: ['', Validators.required],
-      status: ['', Validators.required],
-      weight: ['', Validators.required],
-      description: ['']
-    });
-    this.productList.push(productGroup);
-  }
 
 
     // Method to remove a product from the product list form array

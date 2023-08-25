@@ -4,7 +4,7 @@ export interface Delivery{
     totalDeliveryAmount: number;
     totalAmountDue: number; 
     deliveryStatus: String; 
-    deliveryDate: Date;
+    dispatchDate: Date;
     serialNo: number; 
     paymentMode: String; 
     totalQuantity: number; 

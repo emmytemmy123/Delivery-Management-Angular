@@ -2,7 +2,7 @@
 
 export class Users {
 
-    accountType!: string;
+    userCategory!: string;
     name!: string;
     email!: string;
     phone!: number;
