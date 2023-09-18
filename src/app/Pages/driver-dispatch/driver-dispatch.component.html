@@ -79,6 +79,7 @@
      <th pSortableColumn="receiverAddress">Driver Name <p-sortIcon field="receiverAddress"></p-sortIcon></th>
      <th pSortableColumn="receiverName">ReceiverName <p-sortIcon field="receiverName"></p-sortIcon></th>
      <th pSortableColumn="totalQuantity">Receiver Address <p-sortIcon field="totalQuantity"></p-sortIcon></th>
+     <th pSortableColumn="productName">Product <p-sortIcon field="productName"></p-sortIcon></th>
      <th pSortableColumn="status">Sender  <p-sortIcon field="status"></p-sortIcon></th>
      <th pSortableColumn="paymentStatus">Dispatched Cost <p-sortIcon field="paymentStatus"></p-sortIcon></th>
      <th pSortableColumn="action">Action <p-sortIcon field="action"></p-sortIcon></th>
@@ -96,6 +97,9 @@
      <td>{{dispatch.dispatchName}}</td>
      <td>{{dispatch.receiverName}}</td>
      <td>{{dispatch.receiverAddress}}</td>
+     <ul>
+        <li *ngFor="let item of dispatch.productList">{{ item.productName }}</li>
+      </ul>
      <td>{{dispatch.sender}}</td>
      <td>{{dispatch.totalAmount}}</td>
   

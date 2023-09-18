@@ -69,6 +69,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
    <th pSortableColumn="postedBy">PostedBy <p-sortIcon field="postedBy"></p-sortIcon></th>
    <th pSortableColumn="receiverAddress">ReceiverAddress <p-sortIcon field="receiverAddress"></p-sortIcon></th>
    <th pSortableColumn="receiverName">ReceiverName <p-sortIcon field="receiverName"></p-sortIcon></th>
+   <th pSortableColumn="productName">Product <p-sortIcon field="productName"></p-sortIcon></th>
    <th pSortableColumn="totalQuantity">TotalQuantity <p-sortIcon field="totalQuantity"></p-sortIcon></th>
    <th pSortableColumn="totalDeliveryAmount">TotalDeliveryAmount <p-sortIcon field="totalDeliveryAmount"></p-sortIcon></th>
    <th pSortableColumn="status">Dispatch Status <p-sortIcon field="status"></p-sortIcon></th>
@@ -89,7 +90,10 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
    <td>{{delivery.postedBy}}</td>
    <td>{{delivery.receiverAddress}}</td>
    <td>{{delivery.receiverName}}</td>
-   <td>{{delivery.totalQuantity}}</td>
+   <ul>
+    <li *ngFor="let item of delivery.productItemsList">{{ item.productName }}</li>
+  </ul>
+     <td>{{delivery.totalQuantity}}</td>
    <td>{{delivery.totalDeliveryAmount}}</td>
    <td>{{delivery.status}}</td>
    <td>{{delivery.driverStatus}}</td>

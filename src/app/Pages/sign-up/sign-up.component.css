@@ -1,0 +1,13 @@
+
+
+.custom-input {
+    /* Add your default input styles here */
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+  
+  .is-invalid {
+    /* Define the styles for the invalid input */
+    border: 1px solid red;
+  }
+  

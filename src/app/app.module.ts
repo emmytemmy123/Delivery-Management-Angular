@@ -87,6 +87,7 @@ import { ImageModule } from 'primeng/image';
 import { DispatchService } from './Service/dispatch.service';
 import { DriverDispatchComponent } from './Pages/driver-dispatch/driver-dispatch.component';
 import { DriverPaymentComponent } from './Pages/driver-payment/driver-payment.component';
+import { SignUpComponent } from './Pages/sign-up/sign-up.component';
 
 
 
@@ -134,6 +135,7 @@ import { DriverPaymentComponent } from './Pages/driver-payment/driver-payment.co
     FileUploadComponent,
     DriverDispatchComponent,
     DriverPaymentComponent,
+    SignUpComponent,
     
     
     

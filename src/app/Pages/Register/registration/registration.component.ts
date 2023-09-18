@@ -19,19 +19,20 @@ export class RegistrationComponent implements OnInit {
 
   users: Users = new Users;
 
-  // users!:Users[];
+  isEmailValid: any;  
 
   submitted = false;
 
   userCategory!: any[];
 
   responseMessage!: string;
+
   form: FormGroup;
 
 
 
 
-  constructor(private usersService: UsersService, public router: Router, private fb: FormBuilder) { 
+  constructor(private usersService: UsersService, public router: Router, private formBuilder: FormBuilder) { 
     
     this.userCategory = [
       { name: "Sender" },
@@ -39,14 +40,17 @@ export class RegistrationComponent implements OnInit {
     ];
 
 
-    this.form = this.fb.group({
+
+    // Initialize the form with form controls and their initial values
+    this.form = this.formBuilder.group({
+      userCategory: ['', Validators.required],
       name: ['', Validators.required],
-      email: ['', Validators.required],
-      phone: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.maxLength(11)]],
       address: ['', Validators.required],
       username: ['', Validators.required],
-      password: ['', Validators.required]
-  });
+      password: ['', [Validators.required, Validators.minLength(8)]],
+    });
 
 
   }
@@ -54,43 +58,32 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userCategory = [
-      { name: "Sender" },
-      { name: "Driver" }  
-    ];
+   
 
   }
 
 
-  saveUsers() {
 
-   const body =  {
-      userCategory: this.users.userCategory,
-      name: this.users.name,
-      email: this.users.email,
-      phone: this.users.phone,
-      address: this.users.address,
-      gender: this.users.gender,
-      country: this.users.country,
-      nin: this.users.nin,
-      city:this.users.city,
-      username: this.users.username,
-      password: this.users.password,
-  
-    };
 
-    this.usersService.createUsers(this.users).subscribe((response) => {
+saveUsers() {
+  this.submitted = true;
 
-        if(response.data == "200"){
-          this.responseMessage = ("Registration Successfull")
-        }
-        else{
-          this.responseMessage = ("Registration not Successfull");
-        }
+  // Check if the form is valid before submitting
+  if (this.form.valid) {
+    const body = this.form.value; // Use form.value to get the form data
 
-      });
+    this.usersService.createUsers(body).subscribe((response) => {
+      if (response.data == 200) {
+        this.responseMessage = 'Registration Successful';
+      } else {
+        this.responseMessage = 'Registration Not Successful';
+      }
+    });
+
     this.clearFields();
   }
+}
+
 
 
   // Inside your component class
@@ -107,10 +100,11 @@ hasEmptyRequiredFields(): boolean {
 
 
   
-  
-  clearFields(): void {
-    this.users = new Users(); 
-  }
+clearFields() {
+  // Clear the form fields and reset the form status
+  this.form.reset();
+  this.submitted = false;
+}
 
 
 

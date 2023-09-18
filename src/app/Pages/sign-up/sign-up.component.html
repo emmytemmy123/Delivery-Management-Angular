@@ -1,0 +1,76 @@
+
+
+<br><br>
+<div class="container">
+<div class="row">
+
+
+    <div class="col-md-6 offset-md-3">
+
+        <form [formGroup]="registerForm" (ngSubmit)="registerUser()" >
+
+            <div class="form-group">
+                <label for="firstName" class=""> FirstName:</label>
+                <input formControlName="firstName" 
+                [ngClass]="{'is-invalid':submitted && registerForm.get('firstName')?.invalid}" type="text" class="form-control">
+                <div *ngIf="submitted && registerForm.get('firstName')?.invalid" class="text-danger"> 
+                    <div *ngIf="submitted && registerForm.get('firstName')?.invalid" class="">
+                        First Name is Required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName" class=""> LastName:</label>
+                <input formControlName="lastName" [ngClass]="{'is-invalid':submitted && registerForm.get('lastName')?.invalid}" 
+                type="text" class="form-control">
+                <div *ngIf="submitted && registerForm.get('lastName')?.invalid" class="text-danger"> 
+                    <div *ngIf="submitted && registerForm.get('lastName')?.invalid" class="">
+                        Last Name is Required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="">Email:</label>
+                <input formControlName="email" [ngClass]="{'is-invalid': submitted && registerForm.get('email')?.invalid}" type="text" class="form-control">
+                <div *ngIf="submitted && registerForm.get('email')?.errors" class="text-danger">
+                  <div *ngIf="submitted && registerForm.get('email')?.hasError('required')">
+                    Email is Required
+                  </div>
+                  <div *ngIf="submitted && registerForm.get('email')?.hasError('email')">
+                    Email is not Correct
+                  </div>
+                </div>
+              </div>
+              
+
+            <div class="form-group">
+                <label for="password" class=""> Password:</label>
+                <input formControlName="password" [ngClass]="{'is-invalid':submitted && registerForm.get('password')?.invalid}" 
+                type="password" class="form-control">
+                <div *ngIf="submitted && registerForm.get('password')?.errors" class="text-danger">
+                    <div *ngIf="submitted && registerForm.get('password')?.hasError('required')">
+                      Password is Required
+                    </div>
+                    <div *ngIf="submitted && registerForm.get('password')?.hasError('minlength')">
+                      Password should be atleast 8 character
+                    </div>
+                  </div>
+            </div>
+
+            
+
+            <div class="form-group">
+               <button class="btn btn-primary">Register</button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+
+</div>
+
+</div>

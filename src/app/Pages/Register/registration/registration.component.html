@@ -54,70 +54,106 @@
     <div class="row" >
         <div class="col-md-6">
             
-            <form >
+            <form (ngSubmit)="saveUsers()" [formGroup]="form">
                 <fieldset class="fadeinup animation-duration-3000 animation-ease-out" style="align-content: center;">
-                    <legend class="text-center">Valid information is required to register. <span class="req"></span></legend>
 
+                    <legend class="text-center">Valid information is required to register. <span class="req"></span></legend>
             
                     <div *ngIf="responseMessage" style="text-align: center;">
                         <p style="color: rgb(98, 187, 162); font-size: 24px;">{{ responseMessage }}</p>
                     </div>
             
                     <div class="form-group">
-                            <!-- <label for="userCategory">Category</label> -->
-                            <p-dropdown class="custom-dropdown" [style]="{'width':'95%'}" inputId="dropdown"
-                                [autoDisplayFirst]="false" [options]="userCategory" [showClear]="true" optionLabel="name"
-                                optionValue="name" [(ngModel)]="users.userCategory" name="name" placeholder="Category"> </p-dropdown>
+                        <p-dropdown formControlName="userCategory" class="custom-dropdown" [style]="{'width':'95%'}" inputId="dropdown"
+                            [autoDisplayFirst]="false" [options]="userCategory" [showClear]="true" optionLabel="name"
+                            [ngClass]="{'is-invalid':submitted && form.get('userCategory')?.invalid}" 
+                            optionValue="name"  name="userCategory" placeholder="Category">
+                        </p-dropdown>
+                        <div *ngIf="submitted && form.get('userCategory')?.invalid" class="text-danger"> 
+                            <div *ngIf="submitted && form.get('userCategory')?.invalid" class="">
+                                Category is Required
+                            </div>
+                        </div>
                     </div>
             
                     <div class="form-group">
-                        <!-- <label for="name">Name:</label> -->
-                            <input required type="text" id="name" [(ngModel)]="users.name" name="name" class="form-control"
-                                maxlength="28" placeholder="Enter your fullname..." />
-                        <div *ngIf="!users.name" class="invalid-feedback">Name is required.</div>
-                        <div *ngIf="form.controls['name'].invalid && (form.controls['name'].dirty )" class="invalid-feedback">Name is required.</div>
+                        <input formControlName="name" type="text" id="name"  name="name" 
+                        class="form-control" placeholder="Enter your fullname..."
+                        [ngClass]="{'is-invalid':submitted && form.get('name')?.invalid}" />
+                        <div *ngIf="submitted && form.get('name')?.invalid" class="text-danger"> 
+                            <div *ngIf="submitted && form.get('name')?.invalid" class="">
+                                Name is Required
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <input formControlName="email" type="email" name="email" id="email"  class="form-control"
+                        [ngClass]="{'is-invalid': submitted && form.get('email')?.invalid}"
+                            placeholder="Enter your email" />
+                            <div *ngIf="submitted && form.get('email')?.errors" class="text-danger">
+                                <div *ngIf="submitted && form.get('email')?.hasError('required')">
+                                  Email is Required
+                                </div>
+                                <div *ngIf="submitted && form.get('email')?.hasError('email')">
+                                  Email is not Correct
+                                </div>
+                    </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <input formControlName="phone" type="text" name="phone" id="phone"  class="form-control"
+                        [ngClass]="{'is-invalid': submitted && form.get('phone')?.invalid}"
+                            placeholder="Enter your contact" />
+                            <div *ngIf="submitted && form.get('phone')?.errors" class="text-danger">
+                                <div *ngIf="submitted && form.get('phone')?.hasError('required')">
+                                  Phone is Required
+                                </div>
+                                <div *ngIf="submitted && form.get('phone')?.hasError('maxlength')">
+                                  Phone should not be more than 11 characters
+                                </div>
+                              </div>                     
+                    </div>
+            
+                    <div class="form-group">
+                        <input formControlName="address" type="text" name="address" id="address" 
+                        [ngClass]="{'is-invalid': submitted && form.get('address')?.invalid}"
+                            class="form-control" placeholder="Enter your address" />
+                            <div *ngIf="submitted && form.get('address')?.invalid" class="text-danger"> 
+                                <div *ngIf="submitted && form.get('address')?.invalid" class="">
+                                    Address is Required
+                                </div>
+                            </div>     
+                    </div>
+            
+                    <div class="form-group">
+                        <input formControlName="username" type="text" name="username" id="username" class="form-control"
+                        [ngClass]="{'is-invalid': submitted && form.get('username')?.invalid}" placeholder="Enter your username" />
+                            <div *ngIf="submitted && form.get('username')?.invalid" class="text-danger"> 
+                                <div *ngIf="submitted && form.get('username')?.invalid" class="">
+                                    Username is Required
+                                </div>
+                            </div>         
+                    </div>
+            
+                    <div class="form-group">
+                        <input formControlName="password" type="password" name="password" id="password" class="form-control"
+                        [ngClass]="{'is-invalid': submitted && form.get('password')?.invalid}" placeholder="Enter your password" />
+                            <div *ngIf="submitted && form.get('password')?.errors" class="text-danger">
+                                <div *ngIf="submitted && form.get('password')?.hasError('required')">
+                                  Password is Required
+                                </div>
+                                <div *ngIf="submitted && form.get('password')?.hasError('minlength')">
+                                  Password should be atleast 8 character
+                                </div>
+                              </div>      
+                     </div>
+            
+                    <p-button label="Register" type="submit" styleClass="p-button-rounded"></p-button>
 
-                    </div>
-            
-                    <div class="form-group">
-                        <!-- <label for="email">Email:</label> -->
-                            <input required type="email" name="email" id="email" [(ngModel)]="users.email" class="form-control"
-                                placeholder="Enter your email" />
-                        <div *ngIf="!users.email" class="invalid-feedback">Email is required.</div>
-                    </div>
-            
-                    <div class="form-group">
-                        <!-- <label for="phone">Phone:</label> -->
-                            <input required type="tel" name="phone" id="phone" [(ngModel)]="users.phone" class="form-control"
-                                placeholder="Enter your contact" />
-                        <div *ngIf="!users.phone" class="invalid-feedback">Phone is required.</div>
-                    </div>
-            
-                    <div class="form-group">
-                        <!-- <label for="address">Address:</label> -->
-                            <input required type="text" name="address" id="address" [(ngModel)]="users.address"
-                                class="form-control" placeholder="Enter your address" />
-                        <div *ngIf="!users.address" class="invalid-feedback">Address is required.</div>
-                    </div>
-            
-                    <div class="form-group">
-                        <!-- <label for="username">Username:</label> -->
-                            <input required type="text" name="username" id="username" class="form-control"
-                                [(ngModel)]="users.username" placeholder="Enter your username" />
-                        <div *ngIf="!users.username" class="invalid-feedback">Username is required.</div>
-                    </div>
-            
-                    <div class="form-group">
-                        <!-- <label for="password">Password:</label> -->
-                            <input required type="password" name="password" id="password" class="form-control"
-                                [(ngModel)]="users.password" placeholder="Enter your password" />
-                        <div *ngIf="!users.password" class="invalid-feedback">Password is required.</div>
-                    </div>
-            
-                    <p-button label="Register" (click)="saveUsers()" styleClass="p-button-rounded"></p-button>
-                </fieldset>
+                    </fieldset>
             </form>
-            
+                        
 
 
             <!-- second for to fiter user-->

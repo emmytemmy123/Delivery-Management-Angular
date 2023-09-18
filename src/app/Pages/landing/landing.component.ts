@@ -70,6 +70,14 @@ export class LandingComponent {
     name: any;
     username: any;
 
+    isHovered1 = false;
+    isHovered2 = false;
+    isHovered3 = false;
+    isHovered4 = false;
+    isHovered5 = false;
+    isHovered6 = false;
+    
+
 
     constructor(public layoutService: LayoutService, public router: Router, 
          private authService:AuthenticationService) { }
