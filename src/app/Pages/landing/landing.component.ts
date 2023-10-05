@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener  } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../Service/app.layout.service';
 import { AuthenticationService } from 'src/app/Service/authentication.service';
@@ -70,23 +70,38 @@ export class LandingComponent {
     name: any;
     username: any;
 
+
+   
     isHovered1 = false;
     isHovered2 = false;
     isHovered3 = false;
     isHovered4 = false;
     isHovered5 = false;
     isHovered6 = false;
+
     
 
 
     constructor(public layoutService: LayoutService, public router: Router, 
          private authService:AuthenticationService) { }
 
-       
+         header_variable = false;
+         isFlipped = false;
 
 
-   
+         toggleFlip() {
+            this.isFlipped = !this.isFlipped;
+          }
 
+
+         @HostListener('window:scroll', ['$event'])
+         onScroll(event: Event): void {
+           if (window.scrollY > 0) {
+             this.isFlipped = true; // Scrolling down
+           } else {
+             this.isFlipped = false; // Scrolling up
+           }
+         }
 
 
 

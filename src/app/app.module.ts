@@ -88,7 +88,7 @@ import { DispatchService } from './Service/dispatch.service';
 import { DriverDispatchComponent } from './Pages/driver-dispatch/driver-dispatch.component';
 import { DriverPaymentComponent } from './Pages/driver-payment/driver-payment.component';
 import { SignUpComponent } from './Pages/sign-up/sign-up.component';
-
+import { HeaderComponent } from './Pages/header/header.component';
 
 
 
@@ -136,6 +136,9 @@ import { SignUpComponent } from './Pages/sign-up/sign-up.component';
     DriverDispatchComponent,
     DriverPaymentComponent,
     SignUpComponent,
+    HeaderComponent,
+    
+    
     
     
     

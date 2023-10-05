@@ -23,6 +23,7 @@ import { FileUploadComponent } from './Pages/file-upload/file-upload.component';
 import { DriverDispatchComponent } from './Pages/driver-dispatch/driver-dispatch.component';
 import { DriverPaymentComponent } from './Pages/driver-payment/driver-payment.component';
 import { SignUpComponent } from './Pages/sign-up/sign-up.component';
+import { HeaderComponent } from './Pages/header/header.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path:'driver', component: DriverComponent},
   {path:'login', component:Login3Component},
   {path:'fileUpload', component:FileUploadComponent},
+  {path:'header', component:HeaderComponent},
   {path:'adminLogin', component:AdminLoginComponent},
   {path:'adminPage', component:AdminPageComponent, canActivate: [AuthGuard] },
   {path:'dispatch', component:DispatchComponent, canActivate: [AuthGuard] },

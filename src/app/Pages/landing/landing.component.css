@@ -40,3 +40,52 @@
   transform: scale(1.1);
 }
   
+body {
+  font-family: var(--font-family);
+  font-weight: normal;
+  background: var(--surface-ground);
+  color: var(--text-color);
+  padding: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
+  background: var(--surface-card);
+  padding: 2rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+
+
+.flip {
+  /* Define initial transform */
+  transform: rotateY(0deg);
+  transition: transform 1s ease;
+}
+
+.flipped {
+  /* Define flipped transform */
+  transform: rotateY(180deg);
+
+}
+
+
+.header_change{
+position: fixed;
+background-color: rgb(21, 170, 113);
+width: 100%;
+z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
