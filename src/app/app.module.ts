@@ -89,6 +89,8 @@ import { DriverDispatchComponent } from './Pages/driver-dispatch/driver-dispatch
 import { DriverPaymentComponent } from './Pages/driver-payment/driver-payment.component';
 import { SignUpComponent } from './Pages/sign-up/sign-up.component';
 import { HeaderComponent } from './Pages/header/header.component';
+import { AnimateModule } from 'primeng/animate';
+
 
 
 
@@ -138,8 +140,7 @@ import { HeaderComponent } from './Pages/header/header.component';
     SignUpComponent,
     HeaderComponent,
     
-    
-    
+
     
     
     

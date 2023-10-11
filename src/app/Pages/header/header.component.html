@@ -1,25 +1,78 @@
 
-<div [ngClass]="{ header_change: header_variable }"  class="good">
 
+<div class="content-section implementation">
+  
+  <div class="card flex flex-column align-items-center">
 
-</div>
-
-
-<div id="scroll-container">
-    <div id="scroll-text">This is scrolling text.<div>
-</div>
-
-
-<div class="flip-card">
-    <div class="flip-card-inner">
-      <div class="flip-card-front">
-        <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
-      </div>
-      <div class="flip-card-back">
-        <h1>John Doe</h1> 
-        <p>Architect & Engineer</p> 
-        <p>We love that guy</p>
-      </div>
+    <div
+      pAnimate
+      enterClass="flip"
+      class="
+        flex
+        justify-content-center
+        align-items-center
+        h-20rem
+        w-20rem
+        border-round
+        shadow-2
+        animation-duration-1000 animation-ease-out
+      "
+    >
+      <span class="text-900 text-3xl font-bold">flip</span>
     </div>
+
+    <div class="h-30rem"></div>
+
+    <div
+      pAnimate
+      enterClass="flipup"
+      class="
+        flex
+        justify-content-center
+        align-items-center
+        h-20rem
+        w-20rem
+        border-round
+        shadow-2
+        animation-duration-1000 animation-ease-out
+      "
+    >
+      <span class="text-900 text-3xl font-bold">flipup</span>
+    </div>
+
+    <div class="h-30rem"></div>
+
+    <div
+      pAnimate
+      enterClass="flipleft"
+      class="
+        flex
+        justify-content-center
+        align-items-center
+        h-20rem
+        w-20rem
+        border-round
+        shadow-2
+        animation-duration-1000 animation-ease-out
+      "
+    >
+      <span class="text-900 text-3xl font-bold">flipleft</span>
+    </div>
+
+  </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
