@@ -68,15 +68,6 @@
         <app-auto-play-gallery class="sm:mt-5 md:mt-5 " style="width: 500px; height: 300px;  margin-left: -700px; "></app-auto-play-gallery>
         </div>
 
-        <div
-        #flippingElement
-        class="flip"
-        [ngClass]="{ flipped: isFlipped }"
-        (click)="toggleFlip()"
-      >
-        flip
-      </div>
-
         
         <div id="features" class="py-4 px-4 lg:px-3 mt-3 mx-0 lg:mx-8   ">
             <div class="grid justify-content-center">
@@ -104,7 +95,7 @@
                   
         
                   <div class="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0 fadeindown animation-duration-1000 animation-iteration-1">
-                    <div p-card class="flipleft animation-duration-1000 animation-iteration-infinite"
+                    <div p-card class="flipleft animation-duration-1000 "
                          style="height: 250px; padding: 0px; border-radius: 10px; background: linear-gradient(90deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2));"
                          [ngStyle]="isHovered2 ? {'box-shadow': '0px 4px 8px rgba(0, 0, 0, 0.2)', 'transform': 'scale(1.05)'} : {}"
                          (mouseenter)="isHovered2 = true" 
